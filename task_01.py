@@ -23,7 +23,7 @@ def sum_orders(customers, orders):
             3: {'name': 'person two', 'email': 'email@two.com'}}
 
         >>> sum_orders(customers=CUSTOMERS, orders=ORDERS)
-        2: {'name': 'Person One',
+        {2: {'name': 'Person One',
             'email': 'email@one.com',
             'orders': 2,
             'total': 20}
@@ -32,14 +32,20 @@ def sum_orders(customers, orders):
             'orders': 1,
             'total': 15}}
     """
-    combined_dict = {
-        'name': 'Person One',
-        'email': 'email@email.com',
-        'orders': orders.itervalues(),
-        'total': sum(orders)
-    }
-    for customer_id in combined_dict:
-        customer_id = customers.copy()
-        combined_dict.update(orders)
-        #zipped = zip(customer_id, combined_dict)
-        return combined_dict
+
+    combined_dict = {}
+    num_orders = 0
+    total = 0
+    cust_name = {}
+
+    for order in orders.itervalues():
+        if order['customer_id'] == 2:
+            num_orders += 1
+            total +=order['total']
+            print total, num_orders
+    for customer in customers.iterkeys():
+        if customer == 2:
+            cust_name.update(customers[2])
+            print cust_name
+    
+
