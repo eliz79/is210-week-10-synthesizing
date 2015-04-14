@@ -33,16 +33,13 @@ def sum_orders(customers, orders):
     combined_dict = {}
     for order in orders.itervalues():
         cust_id = order['customer_id']
-        cust_name = customers[cust_id]['name']
-        cust_email = customers[cust_id]['email']
-        if cust_id not in combined_dict and customers.keys():
-            counter = 1
-            t_orders = order['total']
+        if cust_id not in combined_dict:
+            combined_dict[cust_id] = customers.values()
+            combined_dict[cust_id] = {'orders': 1}
+            combined_dict[cust_id]['total'] = order['total']
         else:
-            combined_dict[cust_id]['orders'] += 1
-            t_orders = ((combined_dict[cust_id]['total']) + (order['total']))
-        final_order = dict(name=cust_name, email=cust_email, orders=counter,
-                           total=t_orders)
-        cust_final_order = {cust_id: final_order}
-        combined_dict.update(cust_final_order)
+            combined_dict[cust_id]['orders'] = order['customer_id']
+            combined_dict[cust_id]['name'] = customers[cust_id]['name']
+            combined_dict[cust_id]['email'] = customers[cust_id]['email']
+            combined_dict[cust_id]['total'] = (order['total'] + order['total'])
     return combined_dict
