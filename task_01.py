@@ -44,4 +44,4 @@ def sum_orders(customers, orders):
         else:
             combined_dict[order['customer_id']]['total'] += order['total']
             combined_dict[order['customer_id']]['orders'] += 1
-            return combined_dict
+    return combined_dict
